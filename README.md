@@ -49,7 +49,7 @@ This image uses environment variables to allow the configuration of some paramet
 
 
 * Variable name: `PASV_ADDRESS_RESOLVE`
-* Default value: YES
+* Default value: NO
 * Accepted values: <NO|YES>
 * Description: Set to YES if you want to use a hostname (as opposed to IP address) in the `PASV_ADDRESS` option.
 
@@ -76,14 +76,14 @@ This image uses environment variables to allow the configuration of some paramet
 ----
 
 * Variable name: `PASV_MIN_PORT`
-* Default value: 21100.
+* Default value: 47400
 * Accepted values: Any valid port number.
 * Description: This will be used as the lower bound of the passive mode port range. Remember to publish your ports with `docker -p` parameter.
 
 ----
 
 * Variable name: `PASV_MAX_PORT`
-* Default value: 21110.
+* Default value: 47470.
 * Accepted values: Any valid port number.
 * Description: This will be used as the upper bound of the passive mode port range. It will take longer to start a container with a high number of published ports.
 
@@ -117,9 +117,9 @@ docker logs vsftpd
 
 ```bash
 docker run -d -v /my/data/directory:/home/vsftpd \
--p 20:20 -p 21:21 -p 21100-21110:21100-21110 \
+-p 20:20 -p 21:21 -p 47400-47470:47400-47470\
 -e FTP_USER=myuser -e FTP_PASS=mypass \
--e PASV_ADDRESS=127.0.0.1 -e PASV_MIN_PORT=21100 -e PASV_MAX_PORT=21110 \
+-e PASV_ADDRESS=127.0.0.1 -e PASV_MIN_PORT=47400 -e PASV_MAX_PORT=47470 \
 --name vsftpd --restart=always liltaz/vsftpd
 ```
 
